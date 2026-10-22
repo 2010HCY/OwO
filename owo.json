@@ -360,5 +360,183 @@
       { "icon": "🍉", "text": "" },
       { "icon": "😣", "text": "" }
     ]
+  },
+  "暹罗猫": {
+    "type": "image",
+    "container": [
+      {
+        "text": "单纯",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/单纯.webp'>"
+      },
+      {
+        "text": "抱大腿",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/抱大腿.webp'>"
+      },
+      {
+        "text": "投币",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/投币.webp'>"
+      },
+      {
+        "text": "呸",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/呸.webp'>"
+      },
+      {
+        "text": "惊讶",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/惊讶.webp'>"
+      },
+      {
+        "text": "不要",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/不要.webp'>"
+      },
+      {
+        "text": "探头",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/探头.webp'>"
+      },
+      {
+        "text": "再见",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/再见.webp'>"
+      },
+      {
+        "text": "呆滞",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/呆滞.webp'>"
+      },
+      {
+        "text": "舔",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/舔.webp'>"
+      },
+      {
+        "text": "哭",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/哭.webp'>"
+      },
+      {
+        "text": "来啦",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/来啦.webp'>"
+      },
+      {
+        "text": "震惊",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/震惊.webp'>"
+      },
+      {
+        "text": "苦鲁西",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/苦鲁西.webp'>"
+      },
+      {
+        "text": "好耶",
+        "icon": "<img src='https://owo.hcyhub.com/暹罗猫/好耶.webp'>"
+      }
+    ]
+  },
+  "耄耋": {
+    "type": "image",
+    "container": [
+      {
+        "text": "京剧耄耋",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/京剧耄耋.jpg'>"
+      },
+      {
+        "text": "你非法哈气，请跟我们走一趟",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/你非法哈气，请跟我们走一趟.jpg'>"
+      },
+      {
+        "text": "博学耄耋-哈基米德公式",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/博学耄耋-哈基米德公式.webp'>"
+      },
+      {
+        "text": "哦",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/哦.jpeg'>"
+      },
+      {
+        "text": "喷火耄耋",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/喷火耄耋.jpg'>"
+      },
+      {
+        "text": "圆头耄耋",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/圆头耄耋.png'>"
+      },
+      {
+        "text": "好想哈气",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/好想哈气.png'>"
+      },
+      {
+        "text": "我有点喜欢你才找你玩，你讲话干嘛凶我",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/我有点喜欢你才找你玩，你讲话干嘛凶我.png'>"
+      },
+      {
+        "text": "按理来说你这个级别的基米无权哈我",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/按理来说你这个级别的基米无权哈我.jpg'>"
+      },
+      {
+        "text": "死掉了",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/死掉了.jpg'>"
+      },
+      {
+        "text": "神风耄耋",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/神风耄耋.jpg'>"
+      },
+      {
+        "text": "红温耄耋",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/红温耄耋.png'>"
+      },
+      {
+        "text": "给你机会你也不中用啊耄耋",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/给你机会你也不中用啊耄耋.jpg'>"
+      },
+      {
+        "text": "给耄耋都整乐了",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/给耄耋都整乐了.jpg'>"
+      },
+      {
+        "text": "耄尾草",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄尾草.jpg'>"
+      },
+      {
+        "text": "耄耋加载中",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋加载中.gif'>"
+      },
+      {
+        "text": "耄耋哈气",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋哈气.gif'>"
+      },
+      {
+        "text": "耄耋天堂",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋天堂.gif'>"
+      },
+      {
+        "text": "耄耋得意",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋得意.jpg'>"
+      },
+      {
+        "text": "耄耋思考",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋思考.jpg'>"
+      },
+      {
+        "text": "耄耋想要",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋想要.jpg'>"
+      },
+      {
+        "text": "耄耋炸弹",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋炸弹.jpg'>"
+      },
+      {
+        "text": "耄耋疑惑",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋疑惑.jpg'>"
+      },
+      {
+        "text": "耄耋送花",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/耄耋送花.jpg'>"
+      },
+      {
+        "text": "蜘蛛耄耋",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/蜘蛛耄耋.gif'>"
+      },
+      {
+        "text": "难道我是一只很坏很坏的小猫咪吗？",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/难道我是一只很坏很坏的小猫咪吗？.jpg'>"
+      },
+      {
+        "text": "飞行员耄耋",
+        "icon": "<img src='https://owo.hcyhub.com/耄耋/飞行员耄耋.jpg'>"
+      }
+    ]
   }
 }
