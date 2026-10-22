@@ -12,11 +12,16 @@
             --text-secondary: #666666;
             --border-color: #e2e2e2;
             --hover-border: #111111;
+            --success: #16a34a;
+            --error: #e53e3e;
         }
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+        [hidden] {
+            display: none !important;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -103,24 +108,6 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: #111;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-size: 12px;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-        }
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
         .loading {
             color: var(--text-secondary);
             font-size: 14px;
@@ -129,6 +116,223 @@
             color: #a3a300;
             text-decoration: none;
             font-weight: bold;
+        }
+        .banner {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translate(-50%, -20px);
+            background: #111;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-size: 13px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1100;
+            white-space: nowrap;
+        }
+        .banner.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(17, 17, 17, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 1000;
+        }
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: min(720px, 100%);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(10px);
+            transition: transform 0.2s ease;
+        }
+        .overlay.show .modal {
+            transform: none;
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+        .modal-title-text {
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .close-btn:hover {
+            background: #f0f0f0;
+        }
+        .close-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+        .modal-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow: auto;
+        }
+        .display-area {
+            position: relative;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            height: 380px;
+            padding: 56px 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            flex-shrink: 0;
+        }
+        .display-actions {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            gap: 8px;
+        }
+        .display-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
+        }
+        .display-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .display-content.text-mode {
+            font-size: 56px;
+            line-height: 1.3;
+            text-align: center;
+            word-break: break-all;
+            color: var(--text-main);
+        }
+        .icon-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .icon-label {
+            flex-shrink: 0;
+        }
+        .icon-value {
+            flex: 1;
+            min-width: 0;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--text-main);
+        }
+        .icon-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .icon-btn:hover {
+            border-color: var(--hover-border);
+            color: var(--text-main);
+        }
+        .icon-btn.done {
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .ico {
+            width: 16px;
+            height: 16px;
+            display: flex;
+        }
+        .ico svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .ico-copy svg,
+        .ico-check svg {
+            fill: currentColor;
+        }
+        .ico-dl svg {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .ico-check {
+            display: none;
+        }
+        .icon-btn.done .ico-check {
+            display: flex;
+        }
+        .icon-btn.done .ico-copy,
+        .icon-btn.done .ico-dl {
+            display: none;
         }
     </style>
 </head>
@@ -144,7 +348,60 @@
         </div>
     </div>
 
+    <div class="banner" id="banner"></div>
+
+    <div class="overlay" id="overlay">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-title-text" id="modalTitle"></span>
+                    <button class="icon-btn" id="headerCopyBtn" data-icon="copy" title="拷贝表情名称"></button>
+                </div>
+                <button class="close-btn" id="closeBtn" title="关闭" aria-label="关闭">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                        <path d="M5 5L19 19M19 5L5 19"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="display-area">
+                    <div class="display-actions">
+                        <button class="icon-btn" id="downloadBtn" data-icon="download" title="下载图片"></button>
+                        <button class="icon-btn" id="displayCopyBtn" data-icon="copy" title="拷贝到剪贴板"></button>
+                    </div>
+                    <div class="display-content" id="displayContent"></div>
+                </div>
+
+                <div class="icon-bar" id="iconBar">
+                    <span class="icon-label">表情Icon属性</span>
+                    <span class="icon-value" id="iconValue"></span>
+                    <button class="icon-btn" id="iconCopyBtn" data-icon="copy" title="拷贝Icon属性"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        const ICONS = {
+            copy: `
+                <span class="ico ico-copy"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M480 400L288 400C279.2 400 272 392.8 272 384L272 128C272 119.2 279.2 112 288 112L421.5 112C425.7 112 429.8 113.7 432.8 116.7L491.3 175.2C494.3 178.2 496 182.3 496 186.5L496 384C496 392.8 488.8 400 480 400zM288 448L480 448C515.3 448 544 419.3 544 384L544 186.5C544 169.5 537.3 153.2 525.3 141.2L466.7 82.7C454.7 70.7 438.5 64 421.5 64L288 64C252.7 64 224 92.7 224 128L224 384C224 419.3 252.7 448 288 448zM160 192C124.7 192 96 220.7 96 256L96 512C96 547.3 124.7 576 160 576L352 576C387.3 576 416 547.3 416 512L416 496L368 496L368 512C368 520.8 360.8 528 352 528L160 528C151.2 528 144 520.8 144 512L144 256C144 247.2 151.2 240 160 240L176 240L176 192L160 192z"/></svg></span>
+                <span class="ico ico-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z"/></svg></span>
+            `,
+            download: `
+                <span class="ico ico-dl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v11"/><path d="M7.5 9.5L12 14l4.5-4.5"/><path d="M4 13v5.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V16"/></svg></span>
+                <span class="ico ico-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z"/></svg></span>
+            `
+        };
+
+        let current = null;
+        let bannerTimer = null;
+
+        function isTextCategory(name) {
+            const n = String(name).toLowerCase();
+            return n.includes('emoji') || n.includes('颜文字');
+        }
+
         async function init() {
             const app = document.getElementById('app');
             try {
@@ -153,6 +410,7 @@
                 const data = await response.json();
                 
                 render(data);
+                initModal();
             } catch (err) {
                 app.innerHTML = `<div class="loading" style="color: #e53e3e;">加载失败: ${err.message}。请确保 owo.json 与本文件在同一根目录下。</div>`;
             }
@@ -196,6 +454,7 @@
                         
                         card.appendChild(iconDiv);
                         card.appendChild(textDiv);
+                        card.addEventListener('click', () => openModal(item, categoryName));
                         
                         grid.appendChild(card);
                     });
@@ -217,13 +476,196 @@
             }
         }
 
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 1200);
+        function initModal() {
+            document.querySelectorAll('[data-icon]').forEach(btn => {
+                btn.innerHTML = ICONS[btn.dataset.icon];
+            });
+
+            const overlay = document.getElementById('overlay');
+
+            overlay.addEventListener('click', e => {
+                if (e.target === overlay) closeModal();
+            });
+            document.getElementById('closeBtn').addEventListener('click', closeModal);
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal();
+            });
+
+            document.getElementById('headerCopyBtn').addEventListener('click', async e => {
+                const ok = await copyText(current.item.text);
+                feedback(e.currentTarget, ok, '复制成功', '复制失败，请重试');
+            });
+
+            document.getElementById('displayCopyBtn').addEventListener('click', async e => {
+                let result;
+                if (current.hasImg && !current.isText) {
+                    result = await copyImage(current.src, current.isGif);
+                } else {
+                    result = (await copyText(current.emoticon)) ? 'text' : false;
+                }
+
+                let msg = '复制成功';
+                if (result === 'gif_first_frame') {
+                    msg = '由于浏览器限制仅复制GIF的第一帧，若希望使用完整GIF请下载';
+                }
+
+                feedback(e.currentTarget, !!result, msg, '复制失败');
+            });
+
+            document.getElementById('iconCopyBtn').addEventListener('click', async e => {
+                const ok = await copyText(current.item.icon.trim());
+                feedback(e.currentTarget, ok, '复制成功', '复制失败，请重试');
+            });
+
+            document.getElementById('downloadBtn').addEventListener('click', async e => {
+                await downloadImage(current.src, current.item.text);
+                flashDone(e.currentTarget);
+            });
+        }
+
+        function openModal(item, categoryName) {
+            const isText = isTextCategory(categoryName);
+
+            const tpl = document.createElement('template');
+            tpl.innerHTML = item.icon;
+            const imgEl = tpl.content.querySelector('img');
+            const hasImg = !!imgEl;
+            const src = hasImg ? new URL(imgEl.getAttribute('src'), location.href).href : null;
+
+            current = {
+                item,
+                isText,
+                hasImg,
+                src,
+                isGif: !!src && /\.gif([?#]|$)/i.test(src),
+                emoticon: (tpl.content.textContent || '').trim() || item.text
+            };
+
+            document.getElementById('modalTitle').textContent = item.text;
+
+            const content = document.getElementById('displayContent');
+            content.innerHTML = '';
+            if (hasImg && !isText) {
+                content.classList.remove('text-mode');
+                const clone = imgEl.cloneNode(true);
+                clone.className = 'display-img';
+                clone.alt = item.text;
+                content.appendChild(clone);
+            } else {
+                content.classList.add('text-mode');
+                content.innerHTML = item.icon;
+            }
+
+            document.getElementById('downloadBtn').hidden = !hasImg || isText;
+            document.getElementById('iconBar').hidden = isText;
+            document.getElementById('iconValue').textContent = item.icon.trim();
+            document.querySelectorAll('.icon-btn.done').forEach(b => b.classList.remove('done'));
+            document.getElementById('overlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('overlay').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        async function copyText(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (e) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                const ok = document.execCommand('copy');
+                ta.remove();
+                return ok;
+            }
+        }
+
+        function toPngBlob(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    canvas.getContext('2d').drawImage(img, 0, 0);
+                    canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/png');
+                };
+                img.onerror = () => reject(new Error('image load failed'));
+                img.src = src;
+            });
+        }
+
+        async function copyImage(src, isGif) {
+            const safeSrc = src.replace(/"/g, '&quot;');
+            const items = {
+                'text/plain': new Blob([src], { type: 'text/plain' }),
+                'text/html': new Blob([`<img src="${safeSrc}" alt="">`], { type: 'text/html' })
+            };
+
+            try {
+                items['image/png'] = await toPngBlob(src);
+            } catch (e) {}
+
+            try {
+                await navigator.clipboard.write([new ClipboardItem(items)]);
+                return isGif ? 'gif_first_frame' : 'image';
+            } catch (e) {
+                return false;
+            }
+        }
+
+        async function downloadImage(src, name) {
+            if (!src) return;
+            const fileName = (src.split('/').pop().split('?')[0]) || `${name}.png`;
+            try {
+                const res = await fetch(src);
+                const blob = await res.blob();
+                const url = URL.createObjectURL(blob);
+                triggerDownload(url, fileName);
+                setTimeout(() => URL.revokeObjectURL(url), 2000);
+            } catch (e) {
+                triggerDownload(src, fileName);
+            }
+        }
+
+        function triggerDownload(href, fileName) {
+            const a = document.createElement('a');
+            a.href = href;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        }
+
+        function flashDone(btn) {
+            clearTimeout(btn._doneTimer);
+            btn.classList.add('done');
+            btn._doneTimer = setTimeout(() => btn.classList.remove('done'), 1500);
+        }
+
+        function feedback(btn, ok, successMsg, failMsg) {
+            if (ok) {
+                flashDone(btn);
+                showBanner(successMsg);
+            } else {
+                showBanner(failMsg, true);
+            }
+        }
+
+        function showBanner(msg, isError = false) {
+            const banner = document.getElementById('banner');
+            banner.textContent = msg;
+            banner.style.background = isError ? 'var(--error)' : '#111';
+            banner.classList.add('show');
+            clearTimeout(bannerTimer);
+            bannerTimer = setTimeout(() => banner.classList.remove('show'), 1500);
         }
 
         init();
