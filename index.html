@@ -222,7 +222,7 @@
             position: relative;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            height: 380px;
+            height: 365px;
             padding: 56px 20px 20px;
             display: flex;
             align-items: center;
@@ -374,7 +374,7 @@
                 </div>
 
                 <div class="icon-bar" id="iconBar">
-                    <span class="icon-label">表情Icon属性</span>
+                    <span class="icon-label">表情属性</span>
                     <span class="icon-value" id="iconValue"></span>
                     <button class="icon-btn" id="iconCopyBtn" data-icon="copy" title="拷贝Icon属性"></button>
                 </div>
@@ -492,11 +492,13 @@
             });
 
             document.getElementById('headerCopyBtn').addEventListener('click', async e => {
+                const btn = e.currentTarget;
                 const ok = await copyText(current.item.text);
-                feedback(e.currentTarget, ok, '复制成功', '复制失败，请重试');
+                feedback(btn, ok, '复制成功', '复制失败');
             });
 
             document.getElementById('displayCopyBtn').addEventListener('click', async e => {
+                const btn = e.currentTarget;
                 let result;
                 if (current.hasImg && !current.isText) {
                     result = await copyImage(current.src, current.isGif);
@@ -509,17 +511,19 @@
                     msg = '由于浏览器限制仅复制GIF的第一帧，若希望使用完整GIF请下载';
                 }
 
-                feedback(e.currentTarget, !!result, msg, '复制失败');
+                feedback(btn, !!result, msg, '复制失败');
             });
 
             document.getElementById('iconCopyBtn').addEventListener('click', async e => {
+                const btn = e.currentTarget;
                 const ok = await copyText(current.item.icon.trim());
-                feedback(e.currentTarget, ok, '复制成功', '复制失败，请重试');
+                feedback(btn, ok, '复制成功', '复制失败，请重试');
             });
 
             document.getElementById('downloadBtn').addEventListener('click', async e => {
+                const btn = e.currentTarget;
                 await downloadImage(current.src, current.item.text);
-                flashDone(e.currentTarget);
+                flashDone(btn);
             });
         }
 
@@ -586,20 +590,28 @@
             }
         }
 
-        function toPngBlob(src) {
+        function toPngBlob(imgEl) {
             return new Promise((resolve, reject) => {
-                const img = new Image();
-                img.crossOrigin = 'anonymous';
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.naturalWidth;
-                    canvas.height = img.naturalHeight;
-                    canvas.getContext('2d').drawImage(img, 0, 0);
-                    canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/png');
-                };
-                img.onerror = () => reject(new Error('image load failed'));
-                img.src = src;
+                if (!imgEl.complete || !imgEl.naturalWidth) {
+                    imgEl.onload = () => drawAndResolve(imgEl, resolve, reject);
+                    imgEl.onerror = () => reject(new Error('image load failed'));
+                    return;
+                }
+                drawAndResolve(imgEl, resolve, reject);
             });
+        }
+
+        function drawAndResolve(imgEl, resolve, reject) {
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = imgEl.naturalWidth;
+                canvas.height = imgEl.naturalHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(imgEl, 0, 0);
+                canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/png');
+            } catch (e) {
+                reject(e);
+            }
         }
 
         async function copyImage(src, isGif) {
@@ -610,7 +622,10 @@
             };
 
             try {
-                items['image/png'] = await toPngBlob(src);
+                const displayImg = document.querySelector('.display-img');
+                if (displayImg) {
+                    items['image/png'] = await toPngBlob(displayImg);
+                }
             } catch (e) {}
 
             try {
@@ -621,9 +636,54 @@
             }
         }
 
+        function openModal(item, categoryName) {
+            const isText = isTextCategory(categoryName);
+
+            const tpl = document.createElement('template');
+            tpl.innerHTML = item.icon;
+            const imgEl = tpl.content.querySelector('img');
+            const hasImg = !!imgEl;
+            const src = hasImg ? new URL(imgEl.getAttribute('src'), location.href).href : null;
+
+            current = {
+                item,
+                isText,
+                hasImg,
+                src,
+                isGif: !!src && /\.gif([?#]|$)/i.test(src),
+                emoticon: (tpl.content.textContent || '').trim() || item.text
+            };
+
+            document.getElementById('modalTitle').textContent = item.text;
+
+            const content = document.getElementById('displayContent');
+            content.innerHTML = '';
+            if (hasImg && !isText) {
+                content.classList.remove('text-mode');
+                const clone = imgEl.cloneNode(true);
+                clone.crossOrigin = 'anonymous';
+                clone.className = 'display-img';
+                clone.alt = item.text;
+                content.appendChild(clone);
+            } else {
+                content.classList.add('text-mode');
+                content.innerHTML = item.icon;
+            }
+
+            document.getElementById('downloadBtn').hidden = !hasImg || isText;
+            document.getElementById('iconBar').hidden = isText;
+            document.getElementById('iconValue').textContent = item.icon.trim();
+            document.querySelectorAll('.icon-btn.done').forEach(b => b.classList.remove('done'));
+            document.getElementById('overlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
         async function downloadImage(src, name) {
             if (!src) return;
-            const fileName = (src.split('/').pop().split('?')[0]) || `${name}.png`;
+            const match = src.match(/\.[0-9a-z]+([?#]|$)/i);
+            const ext = match ? match[0].split('?')[0] : '.png';
+            const fileName = `${name}${ext}`;
+
             try {
                 const res = await fetch(src);
                 const blob = await res.blob();
@@ -645,6 +705,7 @@
         }
 
         function flashDone(btn) {
+            if (!btn) return;
             clearTimeout(btn._doneTimer);
             btn.classList.add('done');
             btn._doneTimer = setTimeout(() => btn.classList.remove('done'), 1500);
